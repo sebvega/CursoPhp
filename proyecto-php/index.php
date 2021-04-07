@@ -1,0 +1,36 @@
+<?php require_once 'includes/header.php';?>
+<?php require_once 'includes/barraLateral.php'; ?>
+<?php require_once 'includes/helpers.php'; ?>
+
+<!-- contenido principal -->
+<div id="principal">
+	<h1>ultimas entradas</h1>
+
+	<?php 
+			$entradas=conseguirent($conexion,true);
+			if (!empty($entradas)):
+			while ($entrada=mysqli_fetch_assoc($entradas)): ?>
+
+
+	<article class="entrada">
+		<a href="entrada.php?id=<?=$entrada['id']?>">
+			<h2><?=$entrada['titulo'] ?> </h2>
+			<span class="fecha"><?=$entrada['categoria'].' | '.$entrada['fecha']  ?> </span>
+			<p>
+				<?=substr($entrada['descripcion'],0,300).'...'  ?> 
+			</p>
+		</a>
+	</article>
+
+
+	<?php 
+	endwhile;
+	endif;
+	?>
+	
+	<div id="ver-todas">
+		<a href="entradas.php">ver todas las entradas</a>
+	</div>
+</div><!-- fin principal -->
+
+<?php require_once 'includes/foot.php'; ?>
